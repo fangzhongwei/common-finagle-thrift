@@ -14,12 +14,12 @@ trait ScroogeThriftServerTemplate {
   def init: Unit
 }
 
-class ScroogeThriftServerTemplateImpl[FaceImpl <: ThriftService] @Inject()(@Named("finagle.thrift.host.port")
-                                                host: String, thriftServiceImpl: FaceImpl) extends ScroogeThriftServerTemplate {
+class ScroogeThriftServerTemplateImpl @Inject()(@Named("finagle.thrift.host.port")
+                                                host: String, thriftService: ThriftService) extends ScroogeThriftServerTemplate {
   private[this] var server: ListeningServer = _
 
   override def init: Unit = {
-    server = Thrift.server.serveIface(host, thriftServiceImpl)
+    server = Thrift.server.serveIface(host, thriftService)
     Await.ready(server)
   }
 }

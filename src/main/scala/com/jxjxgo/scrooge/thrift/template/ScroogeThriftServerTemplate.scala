@@ -14,7 +14,7 @@ trait ScroogeThriftServerTemplate {
   def init: Unit
 }
 
-class ScroogeThriftServerTemplateImpl[FaceImpl <: ThriftService] @Inject()(@Named("scrooge.thrift.host.port")
+class ScroogeThriftServerTemplateImpl[FaceImpl <: ThriftService] @Inject()(@Named("finagle.thrift.host.port")
                                                 host: String, thriftServiceImpl: FaceImpl) extends ScroogeThriftServerTemplate {
   private[this] var server: ListeningServer = _
 

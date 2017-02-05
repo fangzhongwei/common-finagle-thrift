@@ -13,5 +13,5 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "scrooge-core" % "4.6.0" exclude("com.twitter", "libthrift"),
   "com.twitter" %% "finagle-thrift" % "6.34.0" exclude("com.twitter", "libthrift"),
   "ch.qos.logback" % "logback-classic" % "1.1.7",
-  "com.lawsofnature.common" % "common-utils_2.11" % "1.0"
+  "com.jxjxgo.common" % "common-utils_2.11" % "1.0"
 )

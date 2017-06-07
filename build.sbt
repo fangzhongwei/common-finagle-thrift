@@ -4,7 +4,7 @@ version := "1.1"
 
 organization := "com.jxjxgo.common"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.2"
 
 resolvers += "twitter-repo" at "http://maven.twttr.com"
 resolvers += "central-repo" at "http://central.maven.org/maven2"

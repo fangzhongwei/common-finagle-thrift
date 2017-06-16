@@ -1,0 +1,10 @@
+namespace java com.lawsofnature.business.rpc
+#@namespace scala com.lawsofnature.business.rpc
+
+struct BusinessBaseResponse {
+    1 :string code = "",
+}
+
+service BusinessEndpoint {
+  BusinessBaseResponse createAccount(1:string traceId, 2:i64 memberId),
+}

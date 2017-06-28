@@ -24,6 +24,7 @@ struct MemberSetting {
     1 :i16 languageId = 0,
     2 :i16 timeZone = 0,
     3 :i16 oddsFormat = 0,
+    4 :bool hope = true,
 }
 
 struct MemberProfile {
@@ -50,6 +51,21 @@ struct MemberResponse {
     2 :optional MemberProfile memberProfile;
 }
 
+struct MemberReverseInfoResponse {
+    1 :string code = "",
+    2 :string reverseInfo = "";
+}
+
+struct MemberAuthResponse {
+    1 :string code = "",
+    2 :i64 memberId = 0,
+    3 :string username = "",
+    4 :string password = "",
+    5 :i16 status = 0,
+    6 :string checkCode = "",
+    7 :string reserveInfo = "",
+}
+
 service MemberEndpoint {
   MemberBaseResponse usernameNotUsed(1:string traceId, 2:string username),
   MemberBaseResponse emailNotUsed(1:string traceId, 2:string email),
@@ -63,4 +79,6 @@ service MemberEndpoint {
   MemberBaseResponse modifyPassword(1:string traceId, 2:i64 memberId, 3:string password),
   MemberBaseResponse modifyCheckCode(1:string traceId, 2:i64 memberId, 3:string checkCode),
   MemberBaseResponse modifyReverseInfo(1:string traceId, 2:i64 memberId, 3:string reverseInfo),
+  MemberAuthResponse getMemberAuthByUsername(1:string traceId, 2:string username),
+  MemberReverseInfoResponse getMemberReverseInfo(1:string traceId, 2:i64 memberId),
 }

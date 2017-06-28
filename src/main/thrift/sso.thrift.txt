@@ -11,16 +11,15 @@ struct LoginRequest {
 
 struct SessionResponse {
     1 :string code = "",
-    2 :i64 id = 0,
-    3 :string token = "",
-    4 :string key = "",
-    5 :i16 status = 0,
-    6 :i64 memberId = 0,
+    2 :string token = "",
+    3 :string key = "",
+    4 :i16 status = 0,
+    5 :i64 memberId = 0,
+    6 :string username = "",
     7 :i16 clientId = 0,
     8 :i64 ip = 0,
     9 :string fingerprint = "",
-    10 :i64 gmtUpdate = 0,
-    11 :i64 gmtCreate = 0,
+    10 :i64 gmtCreate = 0,
 }
 
 struct SessionBaseResponse {

@@ -1,0 +1,36 @@
+namespace java com.lawsofnature.business.rpc
+#@namespace scala com.lawsofnature.business.rpc
+
+struct MessageCountResponse {
+    1 :string code = "",
+    2 :i32 count = 0,
+}
+
+struct MessageAbstract {
+    1 :i64 id = 0,
+    2 :string title = "",
+    3 :bool readed = false,
+    4 :string gmtCreate = "",
+}
+
+struct MessageListResponse {
+    1 :string code = "",
+    2 :list<MessageAbstract> messageAbstracts,
+}
+
+struct MessageResponse {
+    1 :string code = "",
+    2 :i64 id = 0,
+    3 :i32 type = 0,
+    4 :i64 memberId = 0,
+    5 :string title = "",
+    6 :string content = "",
+    7 :bool readed = false,
+    8 :string gmtCreate = "",
+}
+
+service MessageEndpoint {
+  MessageCountResponse unreadCount(1:string traceId, 2:i64 memberId),
+  MessageListResponse getMessageList(1:string traceId, 2:i64 memberId),
+  MessageResponse getMessageDetail(1:string traceId, 2:i64 memberId, 3:i64 messageId),
+}

@@ -4,7 +4,14 @@ namespace java com.lawsofnature.business.rpc
 struct BusinessBaseResponse {
     1 :string code = "",
 }
+struct BalanceResponse {
+    1 :string code = "",
+    2 :string totalBalance = "0.00",
+    3 :string mayWithdrawalsBalance = "0.00",
+    4 :string needBetAmt = "0.00",
+}
 
 service BusinessEndpoint {
   BusinessBaseResponse createAccount(1:string traceId, 2:i64 memberId),
+  BalanceResponse getBalance(1:string traceId, 2:i64 memberId),
 }

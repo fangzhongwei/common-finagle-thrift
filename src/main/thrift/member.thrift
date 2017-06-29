@@ -37,6 +37,12 @@ struct MemberProfile {
     7 :MemberSetting memberSetting,
 }
 
+struct MemberRegisterEnv {
+    1 :i64 ip;
+    2 :string fingerprint;
+    3 :string agent;
+}
+
 struct MemberBaseResponse {
     1 :string code = "",
 }
@@ -70,7 +76,7 @@ service MemberEndpoint {
   MemberBaseResponse usernameNotUsed(1:string traceId, 2:string username),
   MemberBaseResponse emailNotUsed(1:string traceId, 2:string email),
   MemberBaseResponse mobileNotUsed(1:string traceId, 2:string mobile),
-  MemberBaseResponse register(1:string traceId, 2:MemberProfile memberProfile, 3:string password, 4:string checkCode),
+  MemberBaseResponse register(1:string traceId, 2:MemberProfile memberProfile, 3:MemberRegisterEnv memberRegisterEnv, 4:string password, 5:string checkCode),
   MemberResponse getMemberProfileById(1:string traceId, 2:i64 id),
   MemberIdResponse getMemberIdByUsername(1:string traceId, 2:string username),
   MemberBaseResponse checkPassword(1:string traceId, 2:i64 memberId, 3:string password),

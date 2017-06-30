@@ -1,0 +1,32 @@
+namespace java com.lawsofnature.voucher.rpc
+#@namespace scala com.lawsofnature.voucher.rpc
+
+struct GenerateVoucherRequest {
+    1 :i64 memberId = 0,
+    2 :i16 voucherType = 0,
+    3 :string username = "",
+    4 :string fingerPrint = "",
+    5 :i64 betId = 0,
+}
+
+struct VoucherIdResponse {
+    1 :string code = "",
+    2 :i64 voucherId = 0,
+}
+
+struct VoucherResponse {
+    1 :string code = "",
+    2 :i64 voucherId = 0,
+    3 :i16 voucherType = 0,
+    4 :i64 memberId = 0,
+    5 :string username = "",
+    6 :string fingerPrint = "",
+    7 :i64 betId = 0,
+    8 :i64 gmtValid = 0,
+    9 :i64 gmtCreate = 0,
+}
+
+service VoucherEndpoint {
+  VoucherIdResponse generateVoucher(1:string traceId, 2:GenerateVoucherRequest req),
+  VoucherResponse getVoucher(1:string traceId, 2:i64 voucherId),
+}

@@ -8,6 +8,13 @@ struct MemberPersonalInfo {
     4 :string birthday = "",
 }
 
+struct ValidateProfileRequest {
+    1 :string username = "",
+    2 :string securityCode = "",
+    3 :string email = "",
+    4 :string birthday = "",
+}
+
 struct MemberAddress {
     1 :string province = "",
     2 :string city = "",
@@ -72,6 +79,12 @@ struct MemberAuthResponse {
     7 :string reserveInfo = "",
 }
 
+struct ValidateProfileResponse {
+    1 :string code = "",
+    2 :i64 memberId = 0,
+    3 :string username = "",
+}
+
 service MemberEndpoint {
   MemberBaseResponse usernameNotUsed(1:string traceId, 2:string username),
   MemberBaseResponse emailNotUsed(1:string traceId, 2:string email),
@@ -87,4 +100,5 @@ service MemberEndpoint {
   MemberBaseResponse modifyReverseInfo(1:string traceId, 2:i64 memberId, 3:string reverseInfo),
   MemberAuthResponse getMemberAuthByUsername(1:string traceId, 2:string username),
   MemberReverseInfoResponse getMemberReverseInfo(1:string traceId, 2:i64 memberId),
+  ValidateProfileResponse validateProfile(1:string traceId, 2:ValidateProfileRequest request),
 }

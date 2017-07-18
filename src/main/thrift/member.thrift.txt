@@ -59,6 +59,11 @@ struct MemberIdResponse {
     2 :i64 memberId = 0,
 }
 
+struct MemberNameResponse {
+    1 :string code = "",
+    2 :string memberName = "",
+}
+
 struct MemberResponse {
     1 :string code = "",
     2 :optional MemberProfile memberProfile;
@@ -85,6 +90,11 @@ struct ValidateProfileResponse {
     3 :string username = "",
 }
 
+struct RealNameResponse {
+    1 :string code = "",
+    3 :string realName = "",
+}
+
 service MemberEndpoint {
   MemberBaseResponse usernameNotUsed(1:string traceId, 2:string username),
   MemberBaseResponse emailNotUsed(1:string traceId, 2:string email),
@@ -101,4 +111,6 @@ service MemberEndpoint {
   MemberAuthResponse getMemberAuthByUsername(1:string traceId, 2:string username),
   MemberReverseInfoResponse getMemberReverseInfo(1:string traceId, 2:i64 memberId),
   ValidateProfileResponse validateProfile(1:string traceId, 2:ValidateProfileRequest request),
+  RealNameResponse getRealName(1:string traceId, 2:i64 memberId),
+  MemberNameResponse getMemberNameByMemberId(1:string traceId, 2:i64 memberId),
 }

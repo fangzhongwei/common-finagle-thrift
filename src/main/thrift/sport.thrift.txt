@@ -85,10 +85,21 @@ struct SoccerResponse {
     2 :string body = "",
 }
 
+struct BetItemValidResponse {
+    1 :string code = "",
+    2 :string betDesc = "",
+}
+
 service SportEndpoint {
   SoccerResponse getSoccer(1:string traceId, 2:string lan),
   SoccerResponse getSoccerLiving(1:string traceId, 2:string lan),
   SportBaseResponse soccerComing(1:string traceId, 2:Soccer soccer),
   SportBaseResponse soccerLivingComing(1:string traceId, 2:Soccer soccer),
   SportBaseResponse soccerConfirmComing(1:string traceId, 2:list<SoccerConfirm> soccerConfirmList),
+  BetItemValidResponse checkWhetherBetItemValid(1:string traceId, 2:i16 pageType, 3:BetItem betItem),
+}
+
+service SportNotifyEndpoint {
+  SportBaseResponse notifySoccer(1:string traceId, 2:string body),
+  SportBaseResponse notifySoccerLiving(1:string traceId, 2:string body),
 }

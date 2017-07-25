@@ -136,6 +136,27 @@ struct WithDrawOrdersSelectRequest {
     11 :string selector = "",
 }
 
+struct BetRequest {
+    1 :i64 memberId = 0,
+    2 :i64 betId = 0,
+    3 :i64 version = 0,
+    4 :i16 sportType = 0,
+    5 :i16 betType = 0,
+    6 :string handicap = "",
+    7 :string odds = "",
+    8 :i16 pageType = 0,
+    9 :string amount = "",
+}
+
+struct SettleSoccerRequest {
+    1 :i64 gameId = 0,
+    2 :i16 resultType = 0,
+    3 :i16 halfHostGoals = 0,
+    4 :i16 halfVisitingGoals = 0,
+    5 :i16 hostGoals = 0,
+    6 :i16 visitingGoals = 0,
+}
+
 struct DepositOrdersPageResponse {
     1 :string code = "",
     2 :i32 pageNo = 0,
@@ -180,14 +201,16 @@ service BusinessEndpoint {
     BusinessBaseResponse createAccount(1:string traceId, 2:i64 memberId),
     BalanceResponse getBalance(1:string traceId, 2:i64 memberId),
     BankCardsResponse getMemberBankCards(1:string traceId, 2:i64 memberId),
-    TransferInfoResponse depositRequest(1:string traceId, 2:DepositRequest request),
+    TransferInfoResponse deposit(1:string traceId, 2:DepositRequest request),
     TransferInfoResponse getTransferInfoByTradeOrderNo(1:string traceId, 2:i64 memberId, 3:string tradeOrderNo),
     DepositOrderResponse memberConfirm(1:string traceId, 2:i64 memberId, 3:string tradeOrderNo, 4:string amoutstr, 5:string transferTime),
     DepositOrderResponse getDepositOrderByTradeOrderNo(1:string traceId, 2:string tradeOrderNo),
     DepositOrdersResponse getDepositOrdersByMemberId(1:string traceId, 2:i64 memberId),
     DepositOrdersPageResponse selectDepositOrders(1:string traceId, 2:DepositOrdersSelectRequest request),
     BusinessBaseResponse employeeConfirm(1:string traceId, 2:EmployeeConfirmRequest request),
-    WithdrawResponse withdrawRequest(1:string traceId, 2:WithdrawRequest request),
+    WithdrawResponse withdraw(1:string traceId, 2:WithdrawRequest request),
     WithdrawOrdersPageResponse selectWithdrawOrders(1:string traceId, 2:WithDrawOrdersSelectRequest request),
     BusinessBaseResponse employeeConfirmWithdraw(1:string traceId, 2:EmployeeConfirmWithdrawRequest request),
+    BusinessBaseResponse bet(1:string traceId, 2:BetRequest request),
+    BusinessBaseResponse settleSoccer(1:string traceId, 2:SettleSoccerRequest request),
 }

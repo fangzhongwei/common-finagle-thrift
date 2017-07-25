@@ -4,10 +4,12 @@ namespace java com.lawsofnature.sport.rpc
 struct BetItem {
     1 :i64 id = 0,
     2 :i64 version = 0,
-    3 :i32 sportType = 0,
-    4 :i32 betType = 0,
-    5 :string odds = "",
-    6 :string handicap = "",
+    3 :i16 sportType = 0,
+    4 :i16 betType = 0,
+    5 :i16 pageType = 0,
+    6 :string currentScore = "",
+    7 :string odds = "",
+    8 :string handicap = "",
 }
 
 struct SoccerAsiaData {
@@ -87,7 +89,23 @@ struct SoccerResponse {
 
 struct BetItemValidResponse {
     1 :string code = "",
-    2 :string betDesc = "",
+    2 :i64 gameId = 0,
+    3 :i64 leagueId = 0,
+    4 :i64 hostTeamId = 0,
+    5 :i64 visitingTeamId = 0,
+    6 :i16 currentHostGoals = 0,
+    7 :i16 currentVisitingGoals = 0,
+    8 :string betDesc = "",
+}
+
+struct SoccerResultResponse {
+    1 :string code = "",
+    2 :i64 gameId = 0,
+    3 :i16 resultType = 0,
+    4 :i16 halfHostGoals = 0,
+    5 :i16 halfVisitingGoals = 0,
+    6 :i16 hostGoals = 0,
+    7 :i16 visitingGoals = 0,
 }
 
 service SportEndpoint {
@@ -96,7 +114,8 @@ service SportEndpoint {
   SportBaseResponse soccerComing(1:string traceId, 2:Soccer soccer),
   SportBaseResponse soccerLivingComing(1:string traceId, 2:Soccer soccer),
   SportBaseResponse soccerConfirmComing(1:string traceId, 2:list<SoccerConfirm> soccerConfirmList),
-  BetItemValidResponse checkWhetherBetItemValid(1:string traceId, 2:i16 pageType, 3:BetItem betItem),
+  BetItemValidResponse checkWhetherBetItemValid(1:string traceId, 2:BetItem betItem),
+  SoccerResultResponse getSoccerResult(1:string traceId, 2:i64 gameId, 3:i16 resultType),
 }
 
 service SportNotifyEndpoint {

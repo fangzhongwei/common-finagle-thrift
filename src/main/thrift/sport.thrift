@@ -3,13 +3,14 @@ namespace java com.lawsofnature.sport.rpc
 
 struct BetItem {
     1 :i64 id = 0,
-    2 :i64 version = 0,
-    3 :i16 sportType = 0,
-    4 :i16 betType = 0,
-    5 :i16 pageType = 0,
-    6 :string currentScore = "",
-    7 :string odds = "",
-    8 :string handicap = "",
+    2 :i64 dataId = 0,
+    3 :i64 version = 0,
+    4 :i16 sportType = 0,
+    5 :i16 betType = 0,
+    6 :i16 pageType = 0,
+    7 :string currentScore = "",
+    8 :string odds = "",
+    9 :string handicap = "",
 }
 
 struct SoccerAsiaData {

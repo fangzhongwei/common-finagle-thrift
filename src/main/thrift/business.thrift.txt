@@ -57,6 +57,20 @@ struct WithdrawOrder {
     16 :string gmtCreate = "",
 }
 
+struct BetOrder {
+    1 :string tradeOrderNo = "",
+    2 :i64 memberId = 0,
+    3 :string memberName = "",
+    4 :i16 status = 0,
+    5 :i16 betResult = 0,
+    6 :string betAmount = "",
+    7 :string changeAmount = "",
+    8 :string currentScore = "",
+    9 :string finalScore = "",
+    10 :string orderDesc = "",
+    11 :string gmtCreate = "",
+}
+
 struct BusinessBaseResponse {
     1 :string code = "",
 }
@@ -136,16 +150,33 @@ struct WithDrawOrdersSelectRequest {
     11 :string selector = "",
 }
 
+struct BetOrdersSelectRequest {
+    1 :i32 pageNo = 0,
+    2 :i32 pageSize = 0,
+    3 :string tradeOrderNo = "",
+    4 :i64 memberId = 0,
+    5 :string memberName = "",
+    6 :i16 status = 0,
+    7 :i16 betResult = 0,
+    8 :string minBetAmount = "",
+    9 :string maxBetAmount = "",
+    10 :string minChangeAmount = "",
+    11 :string maxChangeAmount = "",
+    12 :string minDate = "",
+    13 :string maxDate = "",
+}
+
 struct BetRequest {
     1 :i64 memberId = 0,
     2 :i64 betId = 0,
     3 :i64 version = 0,
     4 :i16 sportType = 0,
     5 :i16 betType = 0,
-    6 :string handicap = "",
-    7 :string odds = "",
-    8 :i16 pageType = 0,
-    9 :string amount = "",
+    6 :string score = "",
+    7 :string handicap = "",
+    8 :string odds = "",
+    9 :i16 pageType = 0,
+    10 :string amount = "",
 }
 
 struct SettleSoccerRequest {
@@ -173,6 +204,15 @@ struct WithdrawOrdersPageResponse {
     4 :i32 totalPages = 0,
     5 :i32 totalCount = 0,
     6 :list<WithdrawOrder> orders,
+}
+
+struct BetOrdersPageResponse {
+    1 :string code = "",
+    2 :i32 pageNo = 0,
+    3 :i32 pageSize = 0,
+    4 :i32 totalPages = 0,
+    5 :i32 totalCount = 0,
+    6 :list<BetOrder> orders,
 }
 
 struct BankCard{
@@ -210,6 +250,7 @@ service BusinessEndpoint {
     BusinessBaseResponse employeeConfirm(1:string traceId, 2:EmployeeConfirmRequest request),
     WithdrawResponse withdraw(1:string traceId, 2:WithdrawRequest request),
     WithdrawOrdersPageResponse selectWithdrawOrders(1:string traceId, 2:WithDrawOrdersSelectRequest request),
+    BetOrdersPageResponse selectBetOrders(1:string traceId, 2:BetOrdersSelectRequest request),
     BusinessBaseResponse employeeConfirmWithdraw(1:string traceId, 2:EmployeeConfirmWithdrawRequest request),
     BusinessBaseResponse bet(1:string traceId, 2:BetRequest request),
     BusinessBaseResponse settleSoccer(1:string traceId, 2:SettleSoccerRequest request),

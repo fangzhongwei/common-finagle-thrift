@@ -43,8 +43,22 @@ struct SoccerGame {
     6 :i32 hostTeamGoals = 0,
     7 :i32 visitingTeamGoals = 0,
     8 :string startTime = "",
-    9 :optional SoccerEuropeData europeData,
-    10 : list<SoccerAsiaData> asiaDataList,
+    9 :string enVs = "",
+    10 :bool hasRedCard = false,
+    11 : optional SoccerEuropeData europeData,
+    12 : list<SoccerAsiaData> asiaDataList,
+}
+
+struct CommonSoccerGame {
+    1 :i64 id = 0,
+    2 :string hostTeamName = "",
+    3 :string visitingTeamName = "",
+    4 :i32 stage = 0,
+    5 :i32 stageSeconds = 0,
+    6 :i32 hostTeamGoals = 0,
+    7 :i32 visitingTeamGoals = 0,
+    8 :string startTime = "",
+    9 : list<BetItem> betItemList,
 }
 
 struct SoccerLeague {
@@ -53,10 +67,24 @@ struct SoccerLeague {
     3 :list<SoccerGame> gameList,
 }
 
+struct CommonSoccerLeague {
+    1 :i64 id = 0,
+    2 :string name = "",
+    3 :list<CommonSoccerGame> gameList,
+}
+
 struct Soccer{
     1:string code = "",
     2:string lan = "",
-    3:list<SoccerLeague> leagueList,
+    3:string source = "",
+    4:list<SoccerLeague> leagueList,
+}
+
+struct CommonSoccer{
+    1:string code = "",
+    2:string lan = "",
+    3:string source = "",
+    4:list<CommonSoccerLeague> leagueList,
 }
 
 struct SoccerConfirm {
@@ -109,14 +137,49 @@ struct SoccerResultResponse {
     7 :i16 visitingGoals = 0,
 }
 
+struct SoccerWaiting {
+    1 :i64 dataId = 0,
+    2 :string source = "",
+    3 :string startTime = "",
+    4 :string dataLeagueName = "",
+    5 :string dataHostName = "",
+    6 :string dataVisitingName = "",
+    7 :string gmtCreate = "",
+}
+
+struct SoccerWaitingListResponse {
+    1 :string code = "",
+    2 :list<SoccerWaiting> soccerWaitings,
+}
+
+struct Soccer4Match {
+    1 :i64 confirmId = 0,
+    3 :string startTime = "",
+    4 :string confirmLeagueName = "",
+    5 :string confirmHostName = "",
+    6 :string confirmVisitingName = "",
+}
+
+struct Soccer4MatchListResponse {
+    1 :string code = "",
+    2 :list<Soccer4Match> soccer4Matches,
+}
+
 service SportEndpoint {
   SoccerResponse getSoccer(1:string traceId, 2:string lan),
   SoccerResponse getSoccerLiving(1:string traceId, 2:string lan),
   SportBaseResponse soccerComing(1:string traceId, 2:Soccer soccer),
+  SportBaseResponse commonSoccerComing(1:string traceId, 2:CommonSoccer soccer),
   SportBaseResponse soccerLivingComing(1:string traceId, 2:Soccer soccer),
   SportBaseResponse soccerConfirmComing(1:string traceId, 2:list<SoccerConfirm> soccerConfirmList),
   BetItemValidResponse checkWhetherBetItemValid(1:string traceId, 2:BetItem betItem),
   SoccerResultResponse getSoccerResult(1:string traceId, 2:i64 gameId, 3:i16 resultType),
+  SportBaseResponse compare(1:string traceId, 2:Soccer bet365Soccer, 3:Soccer one88Soccer),
+  SportBaseResponse findChance(1:string traceId, 2:list<SoccerConfirm> soccerConfirmList, 3: Soccer soccer),
+  SoccerWaitingListResponse soccerWaitingList(1:string traceId),
+  Soccer4MatchListResponse soccer4MatchList(1:string traceId, 2: i64 gameDataId, 3: bool doFilter),
+  SportBaseResponse matchSoccer(1:string traceId, 2:i64 dataId, 3:i64 confirmId),
+  SportBaseResponse betResponseData(1:string traceId, 2:string betResponse),
 }
 
 service SportNotifyEndpoint {

@@ -1,5 +1,5 @@
-namespace java com.lawsofnature.business.rpc
-#@namespace scala com.lawsofnature.business.rpc
+namespace java com.lawsofnature.message.rpc
+#@namespace scala com.lawsofnature.message.rpc
 
 struct MessageCountResponse {
     1 :string code = "",
@@ -12,6 +12,42 @@ struct MessageAbstract {
     3 :bool readed = false,
     4 :string gmtCreate = "",
 }
+
+struct MessageSelectRequest {
+    1 :i32 pageNo = 0,
+    2 :i32 pageSize = 0,
+    3 :i64 messageId = 0,
+    4 :string memberName = "",
+    5 :i16 type = 0,
+    6 :i16 status = 0,
+    7 :string minDate = "",
+    8 :string maxDate = "",
+}
+
+struct Message {
+    1 :i64 id,
+    2 :i64 responseMessageId,
+    3 :i16 type,
+    4 :i16 status,
+    5 :i64 memberId,
+    6 :string memberName,
+    7 :string title,
+    8 :string content,
+    9 :string employeeName,
+    10 :string gmtRead,
+    11 :string gmtCreate,
+}
+
+
+struct MessagesPageResponse {
+    1 :string code = "",
+    2 :i32 pageNo = 0,
+    3 :i32 pageSize = 0,
+    4 :i32 totalPages = 0,
+    5 :i32 totalCount = 0,
+    6 :list<Message> messages,
+}
+
 
 struct MessageListResponse {
     1 :string code = "",
@@ -29,8 +65,15 @@ struct MessageResponse {
     8 :string gmtCreate = "",
 }
 
+struct MessageBaseResponse {
+    1 :string code = ""
+}
+
 service MessageEndpoint {
   MessageCountResponse unreadCount(1:string traceId, 2:i64 memberId),
   MessageListResponse getMessageList(1:string traceId, 2:i64 memberId),
   MessageResponse getMessageDetail(1:string traceId, 2:i64 memberId, 3:i64 messageId),
+  MessageBaseResponse submitMessage(1:string traceId, 2:i64 memberId, 3:string messageContent),
+  MessagesPageResponse selectMessage(1:string traceId, 2:MessageSelectRequest request),
+  MessageBaseResponse replayMessage(1:string traceId, 2:i64 messageId, 3:string content, 4:i64 employId, 5:string employName),
 }

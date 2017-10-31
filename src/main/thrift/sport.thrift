@@ -36,17 +36,18 @@ struct SoccerEuropeData {
 
 struct SoccerGame {
     1 :i64 id = 0,
-    2 :string hostTeamName = "",
-    3 :string visitingTeamName = "",
-    4 :i32 stage = 0,
-    5 :i32 stageSeconds = 0,
-    6 :i32 hostTeamGoals = 0,
-    7 :i32 visitingTeamGoals = 0,
-    8 :string startTime = "",
-    9 :string enVs = "",
-    10 :bool hasRedCard = false,
-    11 : optional SoccerEuropeData europeData,
-    12 : list<SoccerAsiaData> asiaDataList,
+    2 :string statIdentity = "",
+    3 :string hostTeamName = "",
+    4 :string visitingTeamName = "",
+    5 :i32 stage = 0,
+    6 :i32 stageSeconds = 0,
+    7 :i32 hostTeamGoals = 0,
+    8 :i32 visitingTeamGoals = 0,
+    9 :string startTime = "",
+    10 :string enVs = "",
+    11 :bool hasRedCard = false,
+    12 : optional SoccerEuropeData europeData,
+    13 : list<SoccerAsiaData> asiaDataList,
 }
 
 struct CommonSoccerGame {
